@@ -76,7 +76,6 @@ export type Asset = Entity & Node & {
   upload?: Maybe<AssetUpload>;
   /** Get the url for the asset with provided transformations applied. */
   url: Scalars['String']['output'];
-  videoExercise: Array<Exercise>;
   /** The file width */
   width?: Maybe<Scalars['Float']['output']>;
 };
@@ -204,20 +203,6 @@ export type AssetUrlArgs = {
   transformation?: InputMaybe<AssetTransformationInput>;
 };
 
-
-/** Asset system model */
-export type AssetVideoExerciseArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<ExerciseOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<ExerciseWhereInput>;
-};
-
 export type AssetConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
   position?: InputMaybe<ConnectPositionInput>;
@@ -246,7 +231,6 @@ export type AssetCreateInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** Optionally the system can upload a file for you, for that you need to provide a publicly accessible url */
   uploadUrl?: InputMaybe<Scalars['String']['input']>;
-  videoExercise?: InputMaybe<ExerciseCreateManyInlineInput>;
 };
 
 export type AssetCreateLocalizationDataInput = {
@@ -384,9 +368,6 @@ export type AssetManyWhereInput = {
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
   upload?: InputMaybe<AssetUploadWhereInput>;
-  videoExercise_every?: InputMaybe<ExerciseWhereInput>;
-  videoExercise_none?: InputMaybe<ExerciseWhereInput>;
-  videoExercise_some?: InputMaybe<ExerciseWhereInput>;
 };
 
 export enum AssetOrderByInput {
@@ -442,7 +423,6 @@ export type AssetUpdateInput = {
   reUpload?: InputMaybe<Scalars['Boolean']['input']>;
   /** Optionally the system can upload a file for you, for that you need to provide a publicly accessible url */
   uploadUrl?: InputMaybe<Scalars['String']['input']>;
-  videoExercise?: InputMaybe<ExerciseUpdateManyInlineInput>;
 };
 
 export type AssetUpdateLocalizationDataInput = {
@@ -838,9 +818,6 @@ export type AssetWhereInput = {
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
   upload?: InputMaybe<AssetUploadWhereInput>;
-  videoExercise_every?: InputMaybe<ExerciseWhereInput>;
-  videoExercise_none?: InputMaybe<ExerciseWhereInput>;
-  videoExercise_some?: InputMaybe<ExerciseWhereInput>;
   width?: InputMaybe<Scalars['Float']['input']>;
   /** All values greater than the given value. */
   width_gt?: InputMaybe<Scalars['Float']['input']>;
@@ -1010,13 +987,15 @@ export type Exercise = Entity & Node & {
   publishedBy?: Maybe<User>;
   repetitions?: Maybe<Scalars['Int']['output']>;
   scheduledIn: Array<ScheduledOperation>;
+  sets?: Maybe<Scalars['Int']['output']>;
   /** System stage field */
   stage: Stage;
+  type?: Maybe<ExerciseType>;
   /** The time the document was updated */
   updatedAt: Scalars['DateTime']['output'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
-  video?: Maybe<Asset>;
+  video?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -1070,13 +1049,6 @@ export type ExerciseUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-
-export type ExerciseVideoArgs = {
-  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
-  locales?: InputMaybe<Array<Locale>>;
-  where?: InputMaybe<AssetSingleRelationWhereInput>;
-};
-
 export type ExerciseConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
   position?: InputMaybe<ConnectPositionInput>;
@@ -1102,8 +1074,10 @@ export type ExerciseCreateInput = {
   image?: InputMaybe<AssetCreateOneInlineInput>;
   name?: InputMaybe<Scalars['String']['input']>;
   repetitions?: InputMaybe<Scalars['Int']['input']>;
+  sets?: InputMaybe<Scalars['Int']['input']>;
+  type?: InputMaybe<ExerciseType>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  video?: InputMaybe<AssetCreateOneInlineInput>;
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ExerciseCreateManyInlineInput = {
@@ -1265,6 +1239,28 @@ export type ExerciseManyWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  sets?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  sets_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  sets_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  sets_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  sets_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  sets_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  sets_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  sets_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  type?: InputMaybe<ExerciseType>;
+  /** All values that are contained in given list. */
+  type_in?: InputMaybe<Array<InputMaybe<ExerciseType>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  type_not?: InputMaybe<ExerciseType>;
+  /** All values that are not contained in given list. */
+  type_not_in?: InputMaybe<Array<InputMaybe<ExerciseType>>>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1281,7 +1277,25 @@ export type ExerciseManyWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
-  video?: InputMaybe<AssetWhereInput>;
+  video?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  video_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  video_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  video_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  video_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  video_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  video_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  video_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  video_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  video_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum ExerciseOrderByInput {
@@ -1299,8 +1313,20 @@ export enum ExerciseOrderByInput {
   PublishedAtDesc = 'publishedAt_DESC',
   RepetitionsAsc = 'repetitions_ASC',
   RepetitionsDesc = 'repetitions_DESC',
+  SetsAsc = 'sets_ASC',
+  SetsDesc = 'sets_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC'
+  UpdatedAtDesc = 'updatedAt_DESC',
+  VideoAsc = 'video_ASC',
+  VideoDesc = 'video_DESC'
+}
+
+export enum ExerciseType {
+  Exercise = 'EXERCISE',
+  Stretching = 'STRETCHING',
+  Warmup = 'WARMUP'
 }
 
 export type ExerciseUpdateInput = {
@@ -1310,7 +1336,9 @@ export type ExerciseUpdateInput = {
   image?: InputMaybe<AssetUpdateOneInlineInput>;
   name?: InputMaybe<Scalars['String']['input']>;
   repetitions?: InputMaybe<Scalars['Int']['input']>;
-  video?: InputMaybe<AssetUpdateOneInlineInput>;
+  sets?: InputMaybe<Scalars['Int']['input']>;
+  type?: InputMaybe<ExerciseType>;
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ExerciseUpdateManyInlineInput = {
@@ -1335,6 +1363,9 @@ export type ExerciseUpdateManyInput = {
   duration?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   repetitions?: InputMaybe<Scalars['Int']['input']>;
+  sets?: InputMaybe<Scalars['Int']['input']>;
+  type?: InputMaybe<ExerciseType>;
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ExerciseUpdateManyWithNestedWhereInput = {
@@ -1522,6 +1553,28 @@ export type ExerciseWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  sets?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  sets_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  sets_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  sets_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  sets_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  sets_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  sets_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  sets_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  type?: InputMaybe<ExerciseType>;
+  /** All values that are contained in given list. */
+  type_in?: InputMaybe<Array<InputMaybe<ExerciseType>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  type_not?: InputMaybe<ExerciseType>;
+  /** All values that are not contained in given list. */
+  type_not_in?: InputMaybe<Array<InputMaybe<ExerciseType>>>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1538,7 +1591,25 @@ export type ExerciseWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
-  video?: InputMaybe<AssetWhereInput>;
+  video?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  video_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  video_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  video_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  video_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  video_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  video_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  video_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  video_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  video_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
@@ -5303,14 +5374,74 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
-export type ProgramsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetProgramQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
 
 
-export type ProgramsQuery = { __typename?: 'Query', programs: Array<{ __typename?: 'Program', createdAt: any, description?: string | null, id: string, name?: string | null }> };
+export type GetProgramQuery = { __typename?: 'Query', program?: { __typename?: 'Program', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', url: string } | null } | null };
+
+export type GetProgramWorkoutsQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
 
 
-export const ProgramsDocument = gql`
-    query Programs {
+export type GetProgramWorkoutsQuery = { __typename?: 'Query', program?: { __typename?: 'Program', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', url: string } | null, workouts: Array<{ __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', url: string } | null }> } | null };
+
+export type GetProgramsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProgramsQuery = { __typename?: 'Query', programs: Array<{ __typename?: 'Program', createdAt: any, description?: string | null, id: string, name?: string | null }> };
+
+export type GetWorkoutQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetWorkoutQuery = { __typename?: 'Query', workout?: { __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', id: string } | null } | null };
+
+export type GetWorkoutExercisesQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetWorkoutExercisesQuery = { __typename?: 'Query', workout?: { __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', id: string } | null, exercises: Array<{ __typename?: 'Exercise', id: string, name?: string | null, sets?: number | null, duration?: number | null, repetitions?: number | null, type?: ExerciseType | null, video?: string | null, image?: { __typename?: 'Asset', url: string } | null }> } | null };
+
+
+export const GetProgramDocument = gql`
+    query GetProgram($id: ID!) {
+  program(where: {id: $id}) {
+    id
+    name
+    description
+    image {
+      url
+    }
+  }
+}
+    `;
+export const GetProgramWorkoutsDocument = gql`
+    query GetProgramWorkouts($id: ID!) {
+  program(where: {id: $id}) {
+    id
+    name
+    description
+    image {
+      url
+    }
+    workouts {
+      id
+      name
+      description
+      image {
+        url
+      }
+    }
+  }
+}
+    `;
+export const GetProgramsDocument = gql`
+    query GetPrograms {
   programs {
     createdAt
     description
@@ -5319,16 +5450,68 @@ export const ProgramsDocument = gql`
   }
 }
     `;
+export const GetWorkoutDocument = gql`
+    query GetWorkout($id: ID!) {
+  workout(where: {id: $id}) {
+    id
+    name
+    description
+    image {
+      id
+    }
+  }
+}
+    `;
+export const GetWorkoutExercisesDocument = gql`
+    query GetWorkoutExercises($id: ID!) {
+  workout(where: {id: $id}) {
+    id
+    name
+    description
+    image {
+      id
+    }
+    exercises {
+      id
+      name
+      sets
+      duration
+      repetitions
+      type
+      video
+      image {
+        url
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
-const ProgramsDocumentString = print(ProgramsDocument);
+const GetProgramDocumentString = print(GetProgramDocument);
+const GetProgramWorkoutsDocumentString = print(GetProgramWorkoutsDocument);
+const GetProgramsDocumentString = print(GetProgramsDocument);
+const GetWorkoutDocumentString = print(GetWorkoutDocument);
+const GetWorkoutExercisesDocumentString = print(GetWorkoutExercisesDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    Programs(variables?: ProgramsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: ProgramsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<ProgramsQuery>(ProgramsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Programs', 'query', variables);
+    GetProgram(variables: GetProgramQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetProgramQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetProgramQuery>(GetProgramDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProgram', 'query', variables);
+    },
+    GetProgramWorkouts(variables: GetProgramWorkoutsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetProgramWorkoutsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetProgramWorkoutsQuery>(GetProgramWorkoutsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProgramWorkouts', 'query', variables);
+    },
+    GetPrograms(variables?: GetProgramsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetProgramsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetProgramsQuery>(GetProgramsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPrograms', 'query', variables);
+    },
+    GetWorkout(variables: GetWorkoutQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetWorkoutQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetWorkoutQuery>(GetWorkoutDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetWorkout', 'query', variables);
+    },
+    GetWorkoutExercises(variables: GetWorkoutExercisesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetWorkoutExercisesQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetWorkoutExercisesQuery>(GetWorkoutExercisesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetWorkoutExercises', 'query', variables);
     }
   };
 }
