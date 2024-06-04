@@ -1,0 +1,10 @@
+query GetProgram($id: ID!) {
+  program(where: { id: $id }) {
+    id
+    name
+    description
+    image {
+      url
+    }
+  }
+}
