@@ -14,6 +14,8 @@ const config: CodegenConfig = {
       ],
       config: {
         rawRequest: true,
+        avoidOptionals: true,
+        maybeValue: 'T',
       },
     },
   },
