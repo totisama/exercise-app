@@ -6,7 +6,6 @@ export const Header = () => {
       <h1 className='text-2xl font-bold'>Exercise App</h1>
       <Avatar className='h-8 w-8'>
         <AvatarImage src={'https://github.com/shadcn.png'} />
-        {/* TODO: User intials */}
         <AvatarFallback>Toti</AvatarFallback>
       </Avatar>
     </header>
