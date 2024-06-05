@@ -5462,6 +5462,13 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type GetExerciseQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetExerciseQuery = { __typename?: 'Query', exercise: { __typename?: 'Exercise', id: string, name: string, description: string, instructions: string, sets: number, duration: number, repetitions: number, type: ExerciseType, video: string, image: { __typename?: 'Asset', url: string } } };
+
 export type GetProgramQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -5496,6 +5503,24 @@ export type GetWorkoutExercisesQueryVariables = Exact<{
 export type GetWorkoutExercisesQuery = { __typename?: 'Query', workout: { __typename?: 'Workout', id: string, name: string, description: string, image: { __typename?: 'Asset', url: string }, exercises: Array<{ __typename?: 'Exercise', id: string, name: string, description: string, instructions: string, sets: number, duration: number, repetitions: number, type: ExerciseType, video: string, image: { __typename?: 'Asset', url: string } }> } };
 
 
+export const GetExerciseDocument = gql`
+    query GetExercise($id: ID!) {
+  exercise(where: {id: $id}) {
+    id
+    name
+    description
+    instructions
+    sets
+    duration
+    repetitions
+    type
+    video
+    image {
+      url
+    }
+  }
+}
+    `;
 export const GetProgramDocument = gql`
     query GetProgram($id: ID!) {
   program(where: {id: $id}) {
@@ -5585,6 +5610,7 @@ export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, str
 
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
+const GetExerciseDocumentString = print(GetExerciseDocument);
 const GetProgramDocumentString = print(GetProgramDocument);
 const GetProgramWorkoutsDocumentString = print(GetProgramWorkoutsDocument);
 const GetProgramsDocumentString = print(GetProgramsDocument);
@@ -5592,6 +5618,9 @@ const GetWorkoutDocumentString = print(GetWorkoutDocument);
 const GetWorkoutExercisesDocumentString = print(GetWorkoutExercisesDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetExercise(variables: GetExerciseQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetExerciseQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetExerciseQuery>(GetExerciseDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetExercise', 'query', variables);
+    },
     GetProgram(variables: GetProgramQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetProgramQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetProgramQuery>(GetProgramDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProgram', 'query', variables);
     },

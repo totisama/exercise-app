@@ -1,0 +1,16 @@
+query GetExercise($id: ID!) {
+  exercise(where: { id: $id }) {
+    id
+    name
+    description
+    instructions
+    sets
+    duration
+    repetitions
+    type
+    video
+    image {
+      url
+    }
+  }
+}
