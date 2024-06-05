@@ -24,15 +24,15 @@ export const Workouts = ({ workouts }: WorkoutsProps) => {
   const [open, setOpen] = useState(false)
 
   return (
-    <article className='w-full bg-light-green rounded-3xl py-2 px-4'>
+    <article
+      className='w-full bg-light-green rounded-3xl py-2 px-4'
+      onClick={() => {
+        setOpen(!open)
+      }}
+    >
       <section className='flex justify-between items-center'>
         <h2 className='text-2xl font-medium'>Workouts</h2>
-        <button
-          onClick={() => {
-            setOpen(!open)
-          }}
-          className='transition-all duration-300 ease-in-out hover:scale-125'
-        >
+        <button className='transition-all duration-300 ease-in-out hover:scale-125'>
           {open ? (
             <ArrowUpIcon className='h-7 w-7' />
           ) : (
