@@ -18,6 +18,12 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        'light-blue': '#96ecfc',
+        'light-green': '#9cfcd1',
+        yellow: '#f4d35f',
+        orange: '#e9915c',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
