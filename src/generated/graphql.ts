@@ -4792,7 +4792,7 @@ export type Workout = Entity & Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
-  image?: Maybe<Asset>;
+  image: Asset;
   name?: Maybe<Scalars['String']['output']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -4893,7 +4893,7 @@ export type WorkoutCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   exercises?: InputMaybe<ExerciseCreateManyInlineInput>;
-  image?: InputMaybe<AssetCreateOneInlineInput>;
+  image: AssetCreateOneInlineInput;
   name?: InputMaybe<Scalars['String']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -5386,7 +5386,7 @@ export type GetProgramWorkoutsQueryVariables = Exact<{
 }>;
 
 
-export type GetProgramWorkoutsQuery = { __typename?: 'Query', program?: { __typename?: 'Program', id: string, name?: string | null, description?: string | null, image: { __typename?: 'Asset', url: string }, workouts: Array<{ __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', url: string } | null }> } | null };
+export type GetProgramWorkoutsQuery = { __typename?: 'Query', program?: { __typename?: 'Program', id: string, name?: string | null, description?: string | null, image: { __typename?: 'Asset', url: string }, workouts: Array<{ __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image: { __typename?: 'Asset', url: string } }> } | null };
 
 export type GetProgramsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5398,14 +5398,14 @@ export type GetWorkoutQueryVariables = Exact<{
 }>;
 
 
-export type GetWorkoutQuery = { __typename?: 'Query', workout?: { __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', id: string } | null } | null };
+export type GetWorkoutQuery = { __typename?: 'Query', workout?: { __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image: { __typename?: 'Asset', id: string } } | null };
 
 export type GetWorkoutExercisesQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetWorkoutExercisesQuery = { __typename?: 'Query', workout?: { __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', id: string } | null, exercises: Array<{ __typename?: 'Exercise', id: string, name?: string | null, sets?: number | null, duration?: number | null, repetitions?: number | null, type?: ExerciseType | null, video?: string | null, image?: { __typename?: 'Asset', url: string } | null }> } | null };
+export type GetWorkoutExercisesQuery = { __typename?: 'Query', workout?: { __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image: { __typename?: 'Asset', id: string }, exercises: Array<{ __typename?: 'Exercise', id: string, name?: string | null, sets?: number | null, duration?: number | null, repetitions?: number | null, type?: ExerciseType | null, video?: string | null, image?: { __typename?: 'Asset', url: string } | null }> } | null };
 
 
 export const GetProgramDocument = gql`
