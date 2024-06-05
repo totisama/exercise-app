@@ -10,6 +10,7 @@ query GetProgramWorkouts($id: ID!) {
       id
       name
       description
+      subtitle
       image {
         url
       }
