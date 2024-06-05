@@ -1,5 +1,7 @@
+import { Back } from '@/components/back'
 import { Workouts } from '@/components/workouts'
 import { sdk } from '@/lib/client'
+import Image from 'next/image'
 
 export default async function ProgramPage({
   params: { id },
@@ -14,12 +16,20 @@ export default async function ProgramPage({
   }
 
   return (
-    <main className='flex min-h-screen flex-col space-y-3 items-center pt-5 pb-10 px-5'>
+    <main className='space-y-3 my-5 px-5'>
+      <Back />
       <article className='w-full bg-light-blue rounded-3xl p-5 space-y-5'>
-        <h1 className='text-4xl font-medium'>{program.name}</h1>
-        <p>{program.description}</p>
+        <Image
+          src={program.image.url}
+          alt='workouts'
+          width={500}
+          height={300}
+          className='rounded-3xl'
+        />
+        <h1 className='text-3xl text-center font-medium'>{program.name}</h1>
+        <p className=''>{program.description}</p>
       </article>
-      <Workouts />
+      <Workouts workouts={program.workouts} />
     </main>
   )
 }
