@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import { Nunito } from 'next/font/google'
+import { Saira } from 'next/font/google'
 import '@/app/globals.css'
 import type React from 'react'
+import { Header } from '@/components/header'
 
-const nunito = Nunito({ subsets: ['latin'] })
+const saira = Saira({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
 export const metadata: Metadata = {
   title: 'Exercise App',
@@ -17,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={nunito.className}>{children}</body>
+      <body className={saira.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
