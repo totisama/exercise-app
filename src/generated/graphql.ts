@@ -5391,7 +5391,7 @@ export type GetProgramWorkoutsQuery = { __typename?: 'Query', program?: { __type
 export type GetProgramsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProgramsQuery = { __typename?: 'Query', programs: Array<{ __typename?: 'Program', createdAt: any, description?: string | null, id: string, name?: string | null }> };
+export type GetProgramsQuery = { __typename?: 'Query', programs: Array<{ __typename?: 'Program', createdAt: any, description?: string | null, id: string, name?: string | null, image?: { __typename?: 'Asset', url: string } | null }> };
 
 export type GetWorkoutQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -5447,6 +5447,9 @@ export const GetProgramsDocument = gql`
     description
     id
     name
+    image {
+      url
+    }
   }
 }
     `;

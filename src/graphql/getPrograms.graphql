@@ -4,5 +4,8 @@ query GetPrograms {
     description
     id
     name
+    image {
+      url
+    }
   }
 }
