@@ -25,7 +25,7 @@ export const Workouts = ({ workouts }: WorkoutsProps) => {
 
   return (
     <article
-      className='w-full bg-light-green rounded-3xl py-2 px-4'
+      className='w-full bg-light-green rounded-3xl py-2 px-4 hover:cursor-pointer'
       onClick={() => {
         setOpen(!open)
       }}

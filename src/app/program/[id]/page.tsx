@@ -18,7 +18,7 @@ export default async function ProgramPage({
   return (
     <main className='space-y-3 my-5 px-5'>
       <Back />
-      <article className='w-full bg-light-blue rounded-3xl p-5 space-y-5'>
+      <article className='flex flex-col items-center w-full bg-light-blue rounded-3xl p-5 space-y-5'>
         <Image
           src={program.image.url}
           alt='workouts'
