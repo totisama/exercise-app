@@ -980,6 +980,7 @@ export type Exercise = Entity & Node & {
   /** The unique identifier */
   id: Scalars['ID']['output'];
   image?: Maybe<Asset>;
+  instructions?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1072,6 +1073,7 @@ export type ExerciseCreateInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   duration?: InputMaybe<Scalars['Int']['input']>;
   image?: InputMaybe<AssetCreateOneInlineInput>;
+  instructions?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   repetitions?: InputMaybe<Scalars['Int']['input']>;
   sets?: InputMaybe<Scalars['Int']['input']>;
@@ -1186,6 +1188,25 @@ export type ExerciseManyWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
   image?: InputMaybe<AssetWhereInput>;
+  instructions?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  instructions_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  instructions_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  instructions_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  instructions_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  instructions_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  instructions_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  instructions_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  instructions_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  instructions_starts_with?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   name_contains?: InputMaybe<Scalars['String']['input']>;
@@ -1307,6 +1328,8 @@ export enum ExerciseOrderByInput {
   DurationDesc = 'duration_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  InstructionsAsc = 'instructions_ASC',
+  InstructionsDesc = 'instructions_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -1334,6 +1357,7 @@ export type ExerciseUpdateInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   duration?: InputMaybe<Scalars['Int']['input']>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
+  instructions?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   repetitions?: InputMaybe<Scalars['Int']['input']>;
   sets?: InputMaybe<Scalars['Int']['input']>;
@@ -1361,6 +1385,7 @@ export type ExerciseUpdateManyInlineInput = {
 export type ExerciseUpdateManyInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   duration?: InputMaybe<Scalars['Int']['input']>;
+  instructions?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   repetitions?: InputMaybe<Scalars['Int']['input']>;
   sets?: InputMaybe<Scalars['Int']['input']>;
@@ -1500,6 +1525,25 @@ export type ExerciseWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
   image?: InputMaybe<AssetWhereInput>;
+  instructions?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  instructions_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  instructions_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  instructions_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  instructions_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  instructions_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  instructions_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  instructions_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  instructions_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  instructions_starts_with?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   name_contains?: InputMaybe<Scalars['String']['input']>;
@@ -5449,7 +5493,7 @@ export type GetWorkoutExercisesQueryVariables = Exact<{
 }>;
 
 
-export type GetWorkoutExercisesQuery = { __typename?: 'Query', workout?: { __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image: { __typename?: 'Asset', id: string }, exercises: Array<{ __typename?: 'Exercise', id: string, name?: string | null, sets?: number | null, duration?: number | null, repetitions?: number | null, type?: ExerciseType | null, video?: string | null, image?: { __typename?: 'Asset', url: string } | null }> } | null };
+export type GetWorkoutExercisesQuery = { __typename?: 'Query', workout?: { __typename?: 'Workout', id: string, name?: string | null, description?: string | null, image: { __typename?: 'Asset', id: string }, exercises: Array<{ __typename?: 'Exercise', id: string, name?: string | null, description?: string | null, instructions?: string | null, sets?: number | null, duration?: number | null, repetitions?: number | null, type?: ExerciseType | null, video?: string | null, image?: { __typename?: 'Asset', url: string } | null }> } | null };
 
 
 export const GetProgramDocument = gql`
@@ -5522,6 +5566,8 @@ export const GetWorkoutExercisesDocument = gql`
     exercises {
       id
       name
+      description
+      instructions
       sets
       duration
       repetitions

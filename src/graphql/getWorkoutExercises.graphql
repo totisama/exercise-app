@@ -9,6 +9,8 @@ query GetWorkoutExercises($id: ID!) {
     exercises {
       id
       name
+      description
+      instructions
       sets
       duration
       repetitions
