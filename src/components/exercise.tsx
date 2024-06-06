@@ -1,11 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { useEffect } from 'react'
 import { CountdownTimer } from '@/components/countdown-timer'
 import { PlayButton } from '@/components/play-button'
 import { ExerciseType } from '@/generated/graphql'
-import dynamic from 'next/dynamic'
+import { useExercise } from '@/hooks/useExercise'
+import { useIsPlaying } from '@/hooks/useIsPlaying'
 
 // importing it this way to avoid hydration error
 const ReactPlayer = dynamic(async () => await import('react-player/lazy'), {
@@ -28,44 +30,23 @@ interface ExerciseProps {
 }
 
 export const Exercise = ({ exercises }: ExerciseProps) => {
-  const currentExerciseIndex = useRef(1)
-  const [currentSet, setCurrentSet] = useState(1)
-  const [listeningInstructions, setListeningInstructions] = useState(true)
-  const [currentExercise, setCurrentExercise] = useState(
-    exercises[currentExerciseIndex.current]
-  )
-  const [isPlaying, setIsPlaying] = useState(false)
+  const {
+    currentSet,
+    listeningInstructions,
+    finishInstructions,
+    currentExercise,
+    handleNextExercise,
+  } = useExercise(exercises)
+  const { isPlaying, togglePlaying } = useIsPlaying()
   const utterance = new SpeechSynthesisUtterance()
-
-  const handleNextExercise = () => {
-    if (currentSet < currentExercise.sets) {
-      setCurrentSet((prev) => ++prev)
-      setCurrentExercise(exercises[currentExerciseIndex.current])
-    } else if (
-      currentExerciseIndex.current <= exercises.length &&
-      currentSet === currentExercise.sets
-    ) {
-      currentExerciseIndex.current++
-      setCurrentSet(1)
-      setListeningInstructions(true)
-
-      setCurrentExercise(exercises[currentExerciseIndex.current])
-    }
-  }
 
   const handleSpeak = () => {
     utterance.text = currentExercise.instructions
     utterance.lang = 'en-US'
     utterance.rate = 0.9
-    utterance.onend = () => {
-      setListeningInstructions(false)
-    }
+    utterance.onend = finishInstructions
 
     speechSynthesis.speak(utterance)
-  }
-
-  const toggleExercise = () => {
-    setIsPlaying(!isPlaying)
   }
 
   useEffect(() => {
@@ -127,7 +108,7 @@ export const Exercise = ({ exercises }: ExerciseProps) => {
       {!isPlaying && (
         <PlayButton
           isPaused={!isPlaying}
-          togglePause={toggleExercise}
+          togglePause={togglePlaying}
         />
       )}
     </>
