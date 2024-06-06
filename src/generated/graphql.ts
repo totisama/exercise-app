@@ -1347,6 +1347,7 @@ export enum ExerciseOrderByInput {
 }
 
 export enum ExerciseType {
+  Break = 'BREAK',
   Exercise = 'EXERCISE',
   Stretching = 'STRETCHING',
   Warmup = 'WARMUP'
