@@ -14,7 +14,7 @@ export default async function StartPage({
   }
 
   return (
-    <main className='w-full space-y-1 my-5 px-5 pb-10'>
+    <main className='w-full min-h-[calc(100dvh-160px)] flex flex-col items-center justify-between space-y-1 my-5 px-5 pb-10'>
       <Exercise exercises={workout.exercises} />
     </main>
   )
