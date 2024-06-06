@@ -1,6 +1,22 @@
 import { Back } from '@/components/back'
 import { sdk } from '@/lib/client'
+import { type Metadata } from 'next'
 import Image from 'next/image'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string }
+}): Promise<Metadata> {
+  const id = params.id
+
+  const { data } = await sdk.GetExercise({ id })
+  const { exercise } = data
+
+  return {
+    title: `Exercise App | ${exercise.name}`,
+  }
+}
 
 export default async function ExercisePage({
   params: { id },

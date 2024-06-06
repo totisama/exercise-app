@@ -1,7 +1,23 @@
 import { Back } from '@/components/back'
 import { Workouts } from '@/components/workouts'
 import { sdk } from '@/lib/client'
+import { type Metadata } from 'next'
 import Image from 'next/image'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string }
+}): Promise<Metadata> {
+  const id = params.id
+
+  const { data } = await sdk.GetProgramWorkouts({ id })
+  const { program } = data
+
+  return {
+    title: `Exercise App | ${program.name} workout`,
+  }
+}
 
 export default async function ProgramPage({
   params: { id },
