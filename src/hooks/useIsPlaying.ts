@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
-export const useIsPlaying = () => {
+export const useIsPlaying = (play: () => void) => {
   const [isPlaying, setIsPlaying] = useState(false)
 
   const togglePlaying = () => {
     setIsPlaying(!isPlaying)
+    play()
   }
 
   return { isPlaying, togglePlaying }

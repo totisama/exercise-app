@@ -13,7 +13,10 @@ interface Exercise {
   video: string | null
   image: { url: string }
 }
-export const useExercise = (exercises: Exercise[]) => {
+export const useExercise = (
+  exercises: Exercise[],
+  setVolume: (value: number) => void
+) => {
   const currentExerciseIndex = useRef(1)
   const [currentSet, setCurrentSet] = useState(1)
   const [listeningInstructions, setListeningInstructions] = useState(true)
@@ -29,15 +32,21 @@ export const useExercise = (exercises: Exercise[]) => {
       currentExerciseIndex.current <= exercises.length &&
       currentSet === currentExercise.sets
     ) {
-      currentExerciseIndex.current++
-      setCurrentSet(1)
-      setListeningInstructions(true)
-
-      setCurrentExercise(exercises[currentExerciseIndex.current])
+      nextExercise()
     }
   }
 
+  const nextExercise = () => {
+    currentExerciseIndex.current++
+    setCurrentSet(1)
+    setListeningInstructions(true)
+    setVolume(0.25)
+
+    setCurrentExercise(exercises[currentExerciseIndex.current])
+  }
+
   const finishInstructions = () => {
+    setVolume(1)
     setListeningInstructions(false)
   }
 
@@ -47,5 +56,6 @@ export const useExercise = (exercises: Exercise[]) => {
     finishInstructions,
     currentExercise,
     handleNextExercise,
+    nextExercise,
   }
 }
