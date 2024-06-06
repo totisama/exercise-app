@@ -88,3 +88,41 @@ export const ArrowLeftIcon = ({ className }: { className?: string }) => (
     />
   </svg>
 )
+
+export const PauseIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='800'
+    height='800'
+    fill='none'
+    viewBox='0 0 24 24'
+    className={className}
+  >
+    <g
+      stroke='#000'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeWidth='2'
+    >
+      <path d='M15 5.5v13c0 .465 0 .697.038.89a2 2 0 0 0 1.571 1.572c.194.038.426.038.89.038.465 0 .698 0 .892-.038a2 2 0 0 0 1.57-1.572C20 19.2 20 18.97 20 18.512V5.488c0-.457 0-.687-.038-.879a2 2 0 0 0-1.572-1.57C18.197 3 17.965 3 17.5 3s-.697 0-.89.038a1.999 1.999 0 0 0-1.572 1.571C15 4.803 15 5.035 15 5.5ZM4 5.5v13c0 .465 0 .697.038.89a2 2 0 0 0 1.571 1.572c.194.038.426.038.89.038.465 0 .698 0 .892-.038a2 2 0 0 0 1.57-1.572C9 19.2 9 18.97 9 18.512V5.488c0-.457 0-.687-.038-.879A2 2 0 0 0 7.39 3.04C7.197 3 6.965 3 6.5 3s-.697 0-.89.038A1.999 1.999 0 0 0 4.037 4.61C4 4.803 4 5.035 4 5.5Z' />
+    </g>
+  </svg>
+)
+
+export const PlayIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='800'
+    height='800'
+    fill='none'
+    viewBox='0 0 24 24'
+    className={className}
+  >
+    <path
+      fill='#0F0F0F'
+      fillRule='evenodd'
+      d='M5.465 3.923A1 1 0 0 0 4 4.81V19.19a1 1 0 0 0 1.465.886l13.697-7.192a1 1 0 0 0 0-1.77L5.465 3.923ZM2 4.81c0-2.256 2.397-3.705 4.395-2.656l13.697 7.19c2.14 1.125 2.14 4.19 0 5.313L6.395 21.847C4.397 22.897 2 21.447 2 19.191V4.81Z'
+      clipRule='evenodd'
+    />
+  </svg>
+)
