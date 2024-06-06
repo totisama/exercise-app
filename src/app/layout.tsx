@@ -3,6 +3,7 @@ import { Saira } from 'next/font/google'
 import '@/app/globals.css'
 import type React from 'react'
 import { Header } from '@/components/header'
+import { Transition } from '@/components/transition'
 
 const saira = Saira({
   subsets: ['latin'],
@@ -23,7 +24,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={saira.className}>
         <Header />
-        {children}
+        <Transition>{children}</Transition>
       </body>
     </html>
   )
