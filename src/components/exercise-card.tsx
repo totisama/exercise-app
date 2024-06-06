@@ -5,6 +5,7 @@ import Link from 'next/link'
 const EXERCISE_COLORS = {
   WARMUP: 'bg-yellow',
   EXERCISE: 'bg-blue-400',
+  BREAK: 'bg-green-400',
   STRETCHING: 'bg-red-400',
 }
 

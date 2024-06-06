@@ -15,7 +15,7 @@ export default async function ExercisePage({
   }
 
   return (
-    <main className='w-full mt-5 px-5 pb-10'>
+    <main className='w-full space-y-3 mt-5 px-5 pb-10'>
       <Back />
       <section className='space-y-3'>
         <div className='w-full flex flex-col items-center'>

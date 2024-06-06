@@ -64,9 +64,11 @@ export const Workouts = ({ workouts }: WorkoutsProps) => {
                       className='h-40 w-40 rounded-3xl'
                     />
                   </div>
-                  <div className='w-1/2 flex flex-col justify-center'>
+                  <div className='w-1/2 px-2 flex flex-col justify-center items-center'>
                     <h3 className='text-lg'>{workout.subtitle}</h3>
-                    <h2 className='text-lg font-semibold'>{workout.name}</h2>
+                    <h2 className='text-lg text-center font-semibold'>
+                      {workout.name}
+                    </h2>
                   </div>
                 </Link>
               ))}
