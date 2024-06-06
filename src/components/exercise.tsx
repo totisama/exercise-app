@@ -11,6 +11,8 @@ import { type Exercise as ExerciseInterface } from '@/types'
 import { useSpeak } from '@/hooks/useSpeak'
 import { useMusic } from '@/hooks/useMusic'
 import { PlayIcon, SkipIcon } from '@/icons'
+import { FinishWorkout } from '@/components/finish-workout'
+import { Audios } from './audios'
 
 // importing it this way to avoid hydration error
 const ReactPlayer = dynamic(async () => await import('react-player/lazy'), {
@@ -24,6 +26,8 @@ interface ExerciseProps {
 export const Exercise = ({ exercises }: ExerciseProps) => {
   const { audioRef, play, setVolume } = useMusic()
   const { audioRef: audioRefCD, play: playCD } = useMusic()
+  const { audioRef: audioRefFinish, play: playFinish } = useMusic()
+  const { isPlaying, togglePlaying } = useIsPlaying(play)
   const {
     currentSet,
     listeningInstructions,
@@ -31,8 +35,8 @@ export const Exercise = ({ exercises }: ExerciseProps) => {
     currentExercise,
     handleNextExercise,
     nextExercise,
-  } = useExercise(exercises, setVolume)
-  const { isPlaying, togglePlaying } = useIsPlaying(play)
+    finishedWorkout,
+  } = useExercise(exercises, setVolume, playFinish, togglePlaying)
   useSpeak(currentExercise, isPlaying, finishInstructions)
 
   return (
@@ -87,6 +91,7 @@ export const Exercise = ({ exercises }: ExerciseProps) => {
         <ExerciseButton
           bgColor='bg-light-green'
           onClick={togglePlaying}
+          disabled={finishedWorkout}
         >
           <span className='flex gap-1 items-center justify-center'>
             <PlayIcon className='h-7 w-7 font-bold' />
@@ -106,17 +111,12 @@ export const Exercise = ({ exercises }: ExerciseProps) => {
           </span>
         </ExerciseButton>
       )}
-      <audio
-        loop
-        preload='true'
-        src='https://eu-central-1-shared-euc1-02.graphassets.com/clwue0h040dro07w1cfgacud6/clx3fncopxv4h06w4fsxxjs5o?_gl=1*1airq03*_gcl_au*MTg0MTkzMTMzMy4xNzE2ODgzOTY2*_ga*MTY4OTgwNDc1MC4xNzE2ODgzOTY2*_ga_G6FYGSYGZ4*MTcxNzY4NzU2MS4xOC4xLjE3MTc2ODkxMjcuNjAuMC4w'
-        ref={audioRef}
-      ></audio>
-      <audio
-        preload='true'
-        src='https://eu-central-1-shared-euc1-02.graphassets.com/clwue0h040dro07w1cfgacud6/clx3gykfejger07us9jhoaxgr?_gl=1*1xc4hkp*_gcl_au*MTg0MTkzMTMzMy4xNzE2ODgzOTY2*_ga*MTY4OTgwNDc1MC4xNzE2ODgzOTY2*_ga_G6FYGSYGZ4*MTcxNzY5MTE1Ni4xOS4xLjE3MTc2OTExNjEuNTUuMC4w'
-        ref={audioRefCD}
-      ></audio>
+      <FinishWorkout finishedWorkout={finishedWorkout} />
+      <Audios
+        audioRef={audioRef}
+        audioRefCD={audioRefCD}
+        audioRefFinish={audioRefFinish}
+      />
     </>
   )
 }

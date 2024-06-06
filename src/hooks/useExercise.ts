@@ -15,11 +15,14 @@ interface Exercise {
 }
 export const useExercise = (
   exercises: Exercise[],
-  setVolume: (value: number) => void
+  setVolume: (value: number) => void,
+  playFinish: () => void,
+  togglePlaying: () => void
 ) => {
-  const currentExerciseIndex = useRef(1)
+  const currentExerciseIndex = useRef(5)
   const [currentSet, setCurrentSet] = useState(1)
   const [listeningInstructions, setListeningInstructions] = useState(true)
+  const [finishedWorkout, setFinishedWorkout] = useState(false)
   const [currentExercise, setCurrentExercise] = useState(
     exercises[currentExerciseIndex.current]
   )
@@ -32,8 +35,19 @@ export const useExercise = (
       currentExerciseIndex.current <= exercises.length &&
       currentSet === currentExercise.sets
     ) {
+      if (currentExerciseIndex.current + 1 === exercises.length) {
+        finishWorkout()
+        return
+      }
+
       nextExercise()
     }
+  }
+
+  const finishWorkout = () => {
+    setFinishedWorkout(true)
+    playFinish()
+    togglePlaying()
   }
 
   const nextExercise = () => {
@@ -57,5 +71,6 @@ export const useExercise = (
     currentExercise,
     handleNextExercise,
     nextExercise,
+    finishedWorkout,
   }
 }
