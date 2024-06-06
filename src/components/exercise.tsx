@@ -8,6 +8,7 @@ import { PlayButton } from '@/components/play-button'
 import { ExerciseType } from '@/generated/graphql'
 import { useExercise } from '@/hooks/useExercise'
 import { useIsPlaying } from '@/hooks/useIsPlaying'
+import { type Exercise as ExerciseInterface } from '@/types'
 
 // importing it this way to avoid hydration error
 const ReactPlayer = dynamic(async () => await import('react-player/lazy'), {
@@ -15,18 +16,7 @@ const ReactPlayer = dynamic(async () => await import('react-player/lazy'), {
 })
 
 interface ExerciseProps {
-  exercises: Array<{
-    id: string
-    name: string
-    description: string
-    instructions: string
-    sets: number
-    duration: number
-    repetitions: number
-    type: ExerciseType
-    video: string | null
-    image: { url: string }
-  }>
+  exercises: ExerciseInterface[]
 }
 
 export const Exercise = ({ exercises }: ExerciseProps) => {

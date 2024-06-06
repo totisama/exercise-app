@@ -1,4 +1,5 @@
 import { type ExerciseType } from '@/generated/graphql'
+import { type Exercise } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,18 +11,7 @@ const EXERCISE_COLORS = {
 }
 
 interface ExerciseCardProps {
-  exercise: {
-    id: string
-    name?: string | null
-    description?: string | null
-    instructions?: string | null
-    sets?: number | null
-    duration?: number | null
-    repetitions?: number | null
-    type?: ExerciseType | null
-    video?: string | null
-    image: { url: string }
-  }
+  exercise: Exercise
 }
 
 export const ExerciseCard = ({ exercise }: ExerciseCardProps) => {

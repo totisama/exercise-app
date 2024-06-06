@@ -5,16 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-
-interface Workout {
-  id: string
-  name?: string | null | undefined
-  subtitle?: string | null | undefined
-  description?: string | null | undefined
-  image: {
-    url: string
-  }
-}
+import { type Workout } from '@/types'
 
 interface WorkoutsProps {
   workouts: Workout[]
