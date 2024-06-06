@@ -2,13 +2,13 @@
 
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { useEffect } from 'react'
 import { CountdownTimer } from '@/components/countdown-timer'
 import { PlayButton } from '@/components/play-button'
 import { ExerciseType } from '@/generated/graphql'
 import { useExercise } from '@/hooks/useExercise'
 import { useIsPlaying } from '@/hooks/useIsPlaying'
 import { type Exercise as ExerciseInterface } from '@/types'
+import { useSpeak } from '@/hooks/useSpeak'
 
 // importing it this way to avoid hydration error
 const ReactPlayer = dynamic(async () => await import('react-player/lazy'), {
@@ -28,25 +28,7 @@ export const Exercise = ({ exercises }: ExerciseProps) => {
     handleNextExercise,
   } = useExercise(exercises)
   const { isPlaying, togglePlaying } = useIsPlaying()
-  const utterance = new SpeechSynthesisUtterance()
-
-  const handleSpeak = () => {
-    utterance.text = currentExercise.instructions
-    utterance.lang = 'en-US'
-    utterance.rate = 0.9
-    utterance.onend = finishInstructions
-
-    speechSynthesis.speak(utterance)
-  }
-
-  useEffect(() => {
-    if (!isPlaying) {
-      return
-    }
-
-    handleSpeak()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentExercise, isPlaying])
+  useSpeak(currentExercise, isPlaying, finishInstructions)
 
   return (
     <>
