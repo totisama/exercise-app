@@ -91,6 +91,8 @@ export const Exercise = ({ exercises }: ExerciseProps) => {
               url={currentExercise.video}
               width={window.innerWidth - 20}
               height={250}
+              volume={0}
+              muted={true}
             />
           ) : (
             <Image
