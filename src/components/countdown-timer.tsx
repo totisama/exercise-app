@@ -6,10 +6,12 @@ export const CountdownTimer = ({
   time,
   isPlaying = true,
   onFinish,
+  playCountdown,
 }: {
   time: number
   isPlaying: boolean
   onFinish: () => void
+  playCountdown: () => void
 }) => {
   const children = ({ remainingTime }: { remainingTime: number }) => {
     const minutes = Math.floor(remainingTime / 60)
@@ -19,6 +21,12 @@ export const CountdownTimer = ({
     return (
       <span className='text-4xl font-bold'>{`${minutes}:${formattedSeconds}`}</span>
     )
+  }
+
+  const onUpdate = (remainingTime: number) => {
+    if (remainingTime === 4) {
+      playCountdown()
+    }
   }
 
   return (
@@ -32,6 +40,7 @@ export const CountdownTimer = ({
         onFinish()
         return { shouldRepeat: true, delay: 0 }
       }}
+      onUpdate={onUpdate}
     >
       {({ remainingTime }) => children({ remainingTime })}
     </CountdownCircleTimer>
