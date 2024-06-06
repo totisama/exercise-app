@@ -1,0 +1,19 @@
+query GetProgramWorkouts($id: ID!) {
+  program(where: { id: $id }) {
+    id
+    name
+    description
+    image {
+      url
+    }
+    workouts {
+      id
+      name
+      description
+      subtitle
+      image {
+        url
+      }
+    }
+  }
+}

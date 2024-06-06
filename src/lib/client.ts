@@ -1,9 +1,7 @@
 import { GraphQLClient } from 'graphql-request'
+import { getSdk } from '@/generated/graphql'
 
-export const GRAPHQL_ENDPOINT = 'https://harbour-movies.vercel.app/api/graphql'
-
-export const client = new GraphQLClient(GRAPHQL_ENDPOINT, {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
+const client = new GraphQLClient(
+  'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clwue014v030507terwqh93o6/master'
+)
+export const sdk = getSdk(client)

@@ -1,13 +1,18 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Saira } from 'next/font/google'
 import '@/app/globals.css'
 import type React from 'react'
+import { Header } from '@/components/header'
+import { Transition } from '@/components/transition'
 
-const inter = Inter({ subsets: ['latin'] })
+const saira = Saira({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+})
 
 export const metadata: Metadata = {
-  title: 'Movies manager',
-  description: 'Create and manage your movie lists',
+  title: 'Exercise App',
+  description: 'Manage your exercise routines',
 }
 
 export default function RootLayout({
@@ -17,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={saira.className}>
+        <Header />
+        <Transition>{children}</Transition>
+      </body>
     </html>
   )
 }

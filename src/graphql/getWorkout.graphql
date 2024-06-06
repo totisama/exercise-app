@@ -1,0 +1,10 @@
+query GetWorkout($id: ID!) {
+  workout(where: { id: $id }) {
+    id
+    name
+    description
+    image {
+      id
+    }
+  }
+}
