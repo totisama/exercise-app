@@ -1,3 +1,5 @@
+'use client'
+
 import { type ExerciseType } from '@/generated/graphql'
 import { useRef, useState } from 'react'
 

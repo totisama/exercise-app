@@ -1,3 +1,4 @@
+'use client'
 import { type Exercise } from '@/types'
 import { useEffect } from 'react'
 
