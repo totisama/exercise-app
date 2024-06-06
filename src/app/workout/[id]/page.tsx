@@ -13,14 +13,14 @@ export default async function WorkoutPage({
   const { workout } = data
 
   if (workout === null || workout === undefined) {
-    return <h1>Program not found</h1>
+    return <h1>Workout not found</h1>
   }
 
   return (
     <>
-      <main className='w-full space-y-3 my-5 px-5 pb-10'>
+      <main className='w-full space-y-1 my-5 px-5 pb-10'>
         <Back />
-        <section className='w-full rounded-3xl flex flex-col items-center p-5 space-y-5'>
+        <section className='w-full rounded-3xl flex flex-col items-center py-2 px-5 space-y-5'>
           <Image
             src={workout.image.url}
             alt='workouts'
@@ -31,7 +31,7 @@ export default async function WorkoutPage({
           <h1 className='text-3xl text-center font-bold'>{workout.name}</h1>
           <p className='text-lg font-semibold'>{workout.description}</p>
         </section>
-        <section className='w-full rounded-3xl  p-5 space-y-5'>
+        <section className='w-full rounded-3xl py-2 px-5 space-y-5'>
           <h2 className='text-3xl font-medium'>Exercises</h2>
           {workout.exercises.map((exercise) => (
             <ExerciseCard
