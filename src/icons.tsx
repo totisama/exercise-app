@@ -89,7 +89,7 @@ export const ArrowLeftIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-export const PauseIcon = ({ className }: { className?: string }) => (
+export const SkipIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width='800'
@@ -100,11 +100,14 @@ export const PauseIcon = ({ className }: { className?: string }) => (
   >
     <g
       stroke='#000'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      strokeWidth='2'
+      strokeWidth='1.5'
     >
-      <path d='M15 5.5v13c0 .465 0 .697.038.89a2 2 0 0 0 1.571 1.572c.194.038.426.038.89.038.465 0 .698 0 .892-.038a2 2 0 0 0 1.57-1.572C20 19.2 20 18.97 20 18.512V5.488c0-.457 0-.687-.038-.879a2 2 0 0 0-1.572-1.57C18.197 3 17.965 3 17.5 3s-.697 0-.89.038a1.999 1.999 0 0 0-1.572 1.571C15 4.803 15 5.035 15 5.5ZM4 5.5v13c0 .465 0 .697.038.89a2 2 0 0 0 1.571 1.572c.194.038.426.038.89.038.465 0 .698 0 .892-.038a2 2 0 0 0 1.57-1.572C9 19.2 9 18.97 9 18.512V5.488c0-.457 0-.687-.038-.879A2 2 0 0 0 7.39 3.04C7.197 3 6.965 3 6.5 3s-.697 0-.89.038A1.999 1.999 0 0 0 4.037 4.61C4 4.803 4 5.035 4 5.5Z' />
+      <path d='M16.66 9.353c1.787 1.154 1.787 4.14 0 5.294L5.87 21.614C4.135 22.736 2 21.276 2 18.968V5.033c0-2.31 2.134-3.769 3.87-2.648l10.79 6.968Z' />
+      <path
+        strokeLinecap='round'
+        d='M22 5v14'
+        opacity='.5'
+      />
     </g>
   </svg>
 )
